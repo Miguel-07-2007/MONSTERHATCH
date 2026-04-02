@@ -1,11 +1,13 @@
 package Model.Strategy;
 
+import Model.Criatura;
+
 public class EstrategiaDefensiva implements EstrategiaBatalla{
 
     @Override
-    public String actuar() {
+    public String actuar(Criatura atacante, Criatura atacado) {
         // TODO Auto-generated method stub
-        return null;
+        throw new UnsupportedOperationException("Unimplemented method 'actuar'");
     }
 
     

@@ -1,6 +1,8 @@
 package Model.Strategy;
 
+import Model.Criatura;
+
 public interface EstrategiaBatalla {
 
-    String actuar();
+    String actuar(Criatura atacante, Criatura atacado);
 }

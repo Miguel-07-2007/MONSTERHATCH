@@ -67,4 +67,25 @@ public void desactivarEsquiva(){
     this.esquivaActiva = false;
 }
  
+public void aumentarVida(int aumento){
+    this.vida += Math.max(aumento, 0);
+}
+
+public void aumentarDefensa(int aumento){
+    this.defensa += Math.max(aumento, 0);
+}
+
+public String reducirVida(int danio){
+    if(esquivaActiva){
+        esquivaActiva = false;
+        return(nombre + " esquiva completamente el daño");
+    }
+    int danioReal = Math.max(danio - defensa, 0);
+    vida -= danioReal;
+    return(nombre + " recibe " + danioReal + " de daño. Vida restante: " + vida);
+}
+
+public void ejecutarAccion(Criatura enemigo){
+    estrategia.actuar(this, enemigo);
+}
 }
