@@ -1,6 +1,6 @@
 package Model.Strategy;
 
-import Model.Criatura;
+import Model.Factory.Criatura;
 
 public class EstrategiaEvasiva implements EstrategiaBatalla{
 
@@ -10,7 +10,7 @@ public class EstrategiaEvasiva implements EstrategiaBatalla{
     public String actuar(Criatura criatura, Criatura enemigo) {
         criatura.activarEsquiva();
         return(criatura.getNombre() + " ha activado su estrategia evasiva, y está"
-        + "listo para evadir el próximo ataque de " + enemigo.getNombre());
+        + " listo para evadir el próximo ataque de " + enemigo.getNombre());
     }
 
     

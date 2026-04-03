@@ -1,6 +1,6 @@
 package Model.Strategy;
 
-import Model.Criatura;
+import Model.Factory.Criatura;
 
 public class EstrategiaEnvenenadora implements EstrategiaBatalla {
 
@@ -12,8 +12,8 @@ public class EstrategiaEnvenenadora implements EstrategiaBatalla {
     public String actuar(Criatura criatura, Criatura enemigo) {
         int danio = 5 + (int)Math.random() * 5;
         enemigo.aumentarTurnosVeneno(2);
-        return (criatura.getNombre() + "Ha activado su estrategia envenenadora y aplica"
-        + "veneno a " + enemigo.getNombre() + "por 3 turnos\n" 
+        return (criatura.getNombre() + " ha activado su estrategia envenenadora y aplica"
+        + " veneno a " + enemigo.getNombre() + " por 3 turnos\n" 
         + enemigo.reducirVida(danio));
 
     }

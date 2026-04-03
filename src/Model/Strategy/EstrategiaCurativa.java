@@ -1,6 +1,6 @@
 package Model.Strategy;
 
-import Model.Criatura;
+import Model.Factory.Criatura;
 
 public class EstrategiaCurativa implements EstrategiaBatalla{
 
