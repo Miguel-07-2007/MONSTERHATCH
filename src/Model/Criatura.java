@@ -9,6 +9,24 @@ private int ataque;
 private int defensa;
 private boolean esquivaActiva;
 private EstrategiaBatalla estrategia;
+private int turnosVeneno;
+private int turnosLetargados;
+
+public int getTurnosVeneno() {
+    return turnosVeneno;
+}
+
+public void aumentarTurnosVeneno(int turnosVeneno) {
+    this.turnosVeneno += turnosVeneno;
+}
+
+public int getTurnosLetargados() {
+    return turnosLetargados;
+}
+
+public void aumentarTurnosLetargados(int turnosLetargados) {
+    this.turnosLetargados += turnosLetargados;
+}
 
 public Criatura(String nombre, int vida, int ataque, int defensa, EstrategiaBatalla estrategia){
     this.nombre = nombre;
@@ -88,4 +106,12 @@ public String reducirVida(int danio){
 public void ejecutarAccion(Criatura enemigo){
     estrategia.actuar(this, enemigo);
 }
+
+// public String aplicarVeneno(){
+
+// }
+
+// public String aplicarLetarga(){
+    
+// }
 }

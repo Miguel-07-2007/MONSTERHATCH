@@ -4,5 +4,5 @@ import Model.Criatura;
 
 public interface EstrategiaBatalla {
 
-    String actuar(Criatura atacante, Criatura atacado);
+    String actuar(Criatura criatura, Criatura enemigo);
 }
