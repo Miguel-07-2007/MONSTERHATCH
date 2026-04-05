@@ -15,10 +15,10 @@ public class Camaleon extends Criatura {
         this.turnosVeneno = 0;
     
     }
-    // @Override
-    // public String aplicarVeneno(){}
-    
-    //Por ser camaleon, no sufrirá los efectos del veneno.
+    @Override
+    public String aplicarVeneno(){
+    return(this.nombre + " por ser una criatura de tipo camaleon, no sufrirá los efectos del veneno.");
+}
 }
 
 

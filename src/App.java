@@ -14,20 +14,20 @@ public class App {
         while (charizard.estaViva() && pikachu.estaViva()) {
             System.out.println(charizard.ejecutarAccion(pikachu));
             System.out.println(pikachu.ejecutarAccion(charizard));
-            charizard.aplicarEfectos();
-            pikachu.aplicarEfectos();
+            System.out.println(charizard.aplicarEfectos());
+            System.out.println(pikachu.aplicarEfectos());
         }
         String estado = charizard.estaViva() + "-" + pikachu.estaViva();
 
         switch (estado) {
             case "true-false":
-                System.out.println(" como era de esperarse, charizard gana");
+                System.out.println("Como era de esperarse, charizard gana");
                 break;
             case "false-true":
-                System.out.println(" como era de esperarse, pikachu gana");
+                System.out.println("Como era de esperarse, pikachu gana");
                 break;
             case "false-false":
-                System.out.println(" ambos murieron, es un empate");
+                System.out.println("Ambos murieron, es un empate");
                 break;
         }
 

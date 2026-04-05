@@ -125,9 +125,11 @@ public class Criatura {
         return this.vida > 0;
     }
     
+    // Método para ejecutar la acción de la criatura, que puede ser un ataque normal o una estrategia 
+    // especial dependiendo de la probabilidad, si el enemigo ya tiene veneno, no se aplicará la estrategia envenenadora.
     public String ejecutarAccion(Criatura enemigo) {
         int probabilidadDeUsarEstrategia = (int)(Math.random() * 11);
-        if (probabilidadDeUsarEstrategia > 5) {
+        if (probabilidadDeUsarEstrategia > 5 && enemigo.getTurnosVeneno() < 1) {
             return estrategia.actuar(this, enemigo);
         }
         return this.ataca(enemigo);
@@ -136,7 +138,8 @@ public class Criatura {
     public String ataca(Criatura enemigo){
         if (this.turnosLetargados > 0){
             int letarga = 5 + (int) (Math.random() * 6); // la letargia total será de entre 5 y 10 puntos de ataque
-            return (this.nombre + " ataca a " + enemigo.getNombre()) + (enemigo.reducirVida(this.danio - letarga));
+            return (this.nombre + " bajo los efectos de latargia, ataca a " + enemigo.getNombre()) + 
+            ("\n" + enemigo.reducirVida(this.danio - letarga));
         }
         return (this.nombre + " ataca a " + enemigo.getNombre()) + ("\n" + enemigo.reducirVida(this.danio));
     }
@@ -147,8 +150,8 @@ public class Criatura {
         int danio = 5 + (int) (Math.random() * 6); // el daño total del veneno será entre 5 y 10
         this.vida -= danio;
         this.turnosVeneno--;
-        return (nombre + " sufre " + danio + " de daño por el veneno. Vida restante: " + vida +
-                ". Turnos de veneno restantes: " + turnosVeneno);
+        return (this.nombre + " sufre " + danio + " de daño por el veneno. Vida restante: " + this.vida +
+                ". Turnos de veneno restantes: " + this.turnosVeneno);
     }
 
     //Método que se llamará al inicio de cada turno de la batalla
@@ -156,6 +159,6 @@ public class Criatura {
         if (this.turnosVeneno > 0) {
             return this.aplicarVeneno();
         }
-            return (this.nombre + " no sufre ningún efecto en este caso");
+            return ("");
         }
 }
