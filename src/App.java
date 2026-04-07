@@ -1,35 +1,21 @@
-import Model.Factory.Camaleon;
-import Model.Factory.Criatura;
-import Model.Strategy.EstrategiaAgresiva;
-import Model.Strategy.EstrategiaEnvenenadora;
+import Controller.MenuController;
+import Model.Criaturas.Camaleon;
+import Model.Criaturas.Magica;
+import Model.Criaturas.Tanque;
+import Model.Criaturas.Veloz;
+import Model.Criaturas.Factory.Criatura;
+import Model.Estrategias.EstrategiaAgresiva;
+import Model.Estrategias.EstrategiaEnvenenadora;
+import Controller.MenuController;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Criatura charizard = new Camaleon("Charizard", new EstrategiaAgresiva(), "camaleon");
-        Criatura pikachu = new Camaleon("Pikachu", new EstrategiaEnvenenadora(), "tanque");
+        Criatura pikachu = new Tanque("Pikachu", new EstrategiaEnvenenadora(), "tanque");
+        Criatura bulbasaur = new Magica("Bulbasaur", new EstrategiaEnvenenadora(), "magica");
+        Criatura squirtle = new Veloz("Squirtle", new EstrategiaAgresiva(), "veloz");
 
-        System.out.println("-------------------------------------------------------");
-        System.out.println("------------- SE DEJÓ VENIR ESTO HP -------------------");
+        MenuController controladorJuego = new MenuController(new View.MenuConsola(), new java.util.Scanner(System.in));
         
-        while (charizard.estaViva() && pikachu.estaViva()) {
-            System.out.println(charizard.ejecutarAccion(pikachu));
-            System.out.println(pikachu.ejecutarAccion(charizard));
-            System.out.println(charizard.aplicarEfectos());
-            System.out.println(pikachu.aplicarEfectos());
-        }
-        String estado = charizard.estaViva() + "-" + pikachu.estaViva();
-
-        switch (estado) {
-            case "true-false":
-                System.out.println("Como era de esperarse, charizard gana");
-                break;
-            case "false-true":
-                System.out.println("Como era de esperarse, pikachu gana");
-                break;
-            case "false-false":
-                System.out.println("Ambos murieron, es un empate");
-                break;
-        }
-
     }
 }
