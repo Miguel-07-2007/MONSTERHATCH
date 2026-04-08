@@ -62,18 +62,20 @@ public class MenuController {
         Criatura criaturaElegida2 = criaturas.get(criatura1);
         arena.iniciarBatalla(criaturaElegida1, criaturaElegida2);
         arena.mostrarEstado();
+        scanner.close();
     }
 
     /*
      * Muestra las criaturas disponibles
      */
     public void mostrarCriaturasDisponibles() {
-        vistaMenu.mostrarMensaje("--------------------------------------------");
-        vistaMenu.mostrarMensaje("----------- Criaturas disponibles -----------\n");
-        for (Criatura criatura : criaturas) {
-            vistaMenu.mostrarMensaje(criatura.toString());
+        vistaMenu.mostrarMensaje("------------------------------------------------");
+        vistaMenu.mostrarMensaje("------------- Criaturas disponibles -------------\n");
+        for (int i = 0; i < criaturas.size(); i++) {
+            vistaMenu.mostrarMensaje(i+1 + ". " + criaturas.get(i).toString());
         }
-    }
+        System.out.println("------------------------------------------------");
+        }
 
     /*
      * Método que se encarga en su totalidad de la creación de criaturas
@@ -97,6 +99,7 @@ public class MenuController {
         Criatura criaturaCreada = CriaturaFactory.crearCriatura(procesarTipo(opcion2), nombre, estrategia);
         vistaMenu.mostrarMensaje("Has creado exitosamente tu criatura" + criaturaCreada.toString());
         criaturas.add(criaturaCreada);
+        scanner.close();
     }
 
     /*

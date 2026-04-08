@@ -15,7 +15,8 @@ public class App {
     public static void main(String[] args) throws Exception {
 
 
-        MenuController controladorJuego = new MenuController(new View.MenuConsola(), new java.util.Scanner(System.in));
+        MenuController controladorJuego = new Controller.MenuController(new View.MenuConsola());
+        controladorJuego.mostrarCriaturasDisponibles();
         
     }
 }
