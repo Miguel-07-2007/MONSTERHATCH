@@ -8,6 +8,10 @@ import Model.Estrategias.Factory.EstrategiaBatalla;
 
 public class CriaturaFactory {
 
+    /**
+     * Método estático que crea una criatura según su tipo, nombre y estrategia.
+     * Utiliza el patrón de diseño Factory para instanciar la clase correspondiente.
+     */
     public static Criatura crearCriatura(String tipo, String nombre, EstrategiaBatalla estrategia) {
         if (tipo.equalsIgnoreCase("camaleon")) {
             return new Camaleon(nombre, estrategia, tipo);

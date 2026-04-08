@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import Controller.MenuController;
 import Model.Criaturas.Camaleon;
 import Model.Criaturas.Magica;
@@ -10,10 +13,7 @@ import Controller.MenuController;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Criatura charizard = new Camaleon("Charizard", new EstrategiaAgresiva(), "camaleon");
-        Criatura pikachu = new Tanque("Pikachu", new EstrategiaEnvenenadora(), "tanque");
-        Criatura bulbasaur = new Magica("Bulbasaur", new EstrategiaEnvenenadora(), "magica");
-        Criatura squirtle = new Veloz("Squirtle", new EstrategiaAgresiva(), "veloz");
+
 
         MenuController controladorJuego = new MenuController(new View.MenuConsola(), new java.util.Scanner(System.in));
         

@@ -24,7 +24,7 @@ public class Criatura {
         this.tipo = tipo;
     }
 
-        // Constructor con nombre, estrategia y tipo
+    // Constructor con nombre, estrategia y tipo
     public Criatura(String nombre, EstrategiaBatalla estrategia, String tipo) {
         this.nombre = nombre;
         this.estrategia = estrategia;
@@ -125,10 +125,12 @@ public class Criatura {
         return this.vida > 0;
     }
 
-    // Método para ejecutar la acción de la criatura, que puede ser un ataque normal
-    // o una estrategia
-    // especial dependiendo de la probabilidad, si el enemigo ya tiene veneno, no se
-    // aplicará la estrategia envenenadora.
+    /**
+     * Método para ejecutar la acción de la criatura, que puede ser un ataque normal
+     * o una estrategia
+     * especial dependiendo de la probabilidad, si el enemigo ya tiene veneno, no se
+     * aplicará la estrategia envenenadora.
+     */
     public String ejecutarAccion(Criatura enemigo) {
         int probabilidadDeUsarEstrategia = (int) (Math.random() * 11);
         if (probabilidadDeUsarEstrategia > 5 && enemigo.getTurnosVeneno() < 1) {
@@ -146,8 +148,10 @@ public class Criatura {
         return (this.nombre + " ataca a " + enemigo.getNombre()) + ("\n" + enemigo.reducirVida(this.danio));
     }
 
-    // Método para aplicar veneno, que reduce la vida de la criatura,
-    // llamar según la cantidad de turnos veneno restantes.
+    /**
+     * Método para aplicar veneno, que reduce la vida de la criatura,
+     * llamar según la cantidad de turnos veneno restantes.
+     */
     public String aplicarVeneno() {
         int danio = 5 + (int) (Math.random() * 6); // el daño total del veneno será entre 5 y 10
         this.vida -= danio;
@@ -156,7 +160,9 @@ public class Criatura {
                 ". Turnos de veneno restantes: " + this.turnosVeneno);
     }
 
-    // Método que se llamará al inicio de cada turno de la batalla
+    /**
+     * Método que se llamará al inicio de cada turno de la batalla
+     */
     public String aplicarEfectos() {
         if (this.turnosVeneno > 0) {
             return this.aplicarVeneno();

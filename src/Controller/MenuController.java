@@ -1,8 +1,16 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import Model.Criaturas.Camaleon;
+import Model.Criaturas.Magica;
+import Model.Criaturas.Tanque;
+import Model.Criaturas.Veloz;
 import Model.Criaturas.Factory.Criatura;
+import Model.Estrategias.EstrategiaAgresiva;
+import Model.Estrategias.EstrategiaEnvenenadora;
 import Model.Estrategias.Factory.EstrategiaBatalla;
 import View.MenuConsola;
 import Model.Estrategias.Factory.EstrategiaFactory;
@@ -13,18 +21,66 @@ public class MenuController {
     ArenaDeBatalla arena;
     MenuConsola vistaMenu;
     Scanner scanner;
+    List<Criatura> criaturas;
 
     // Constructor del MenuController, exige instancias de MenuConsola y Scanner.
-    public MenuController(MenuConsola vistaMenu, Scanner scanner) {
+    public MenuController(MenuConsola vistaMenu) {
         this.vistaMenu = vistaMenu;
-        this.scanner = scanner;
+        this.scanner = new Scanner(System.in);
+        this.criaturas = new ArrayList<>();
+        Criatura charizard = new Camaleon("Charizard", new EstrategiaAgresiva(), "camaleon");
+        Criatura pikachu = new Tanque("Pikachu", new EstrategiaEnvenenadora(), "tanque");
+        Criatura bulbasaur = new Magica("Bulbasaur", new EstrategiaEnvenenadora(), "magica");
+        Criatura squirtle = new Veloz("Squirtle", new EstrategiaAgresiva(), "veloz");
+        criaturas.add(charizard);
+        criaturas.add(pikachu);
+        criaturas.add(bulbasaur);
+        criaturas.add(squirtle);
+    }
+
+    /*
+     * recibe las entradas del usuario para seleccionar dos criaturas de la lista de
+     * criaturas disponibles y luego llama al método iniciarBatalla de la clase 
+     * ArenaDeBatalla para iniciar la batalla entre las dos criaturas seleccionadas, 
+     * finalmente muestra el estado de la batalla después de cada turno.
+     * 
+     * Es importante revisar el manejo de índices para evitar errores de selección, 
+     * y asegurarse de que el método iniciarBatalla refleje correctamente el estado
+     * de las criaturas después de cada acción.
+     */
+    public void iniciarBatalla() {
+        vistaMenu.mostrarMensaje("---------------------------------------------");
+        vistaMenu.mostrarMensaje("-------- Preparando Arena de Batalla --------\n");
+        vistaMenu.mostrarMensaje("Para iniciar la batalla es necesario que seleccione dos" +
+                "criaturas, a continuación se le presenta la lista: \n");
+        mostrarCriaturasDisponibles();
+        vistaMenu.mostrarMensaje("Escriba el índice de la primera criatura");
+        int criatura1 = scanner.nextInt();
+        Criatura criaturaElegida1 = criaturas.get(criatura1);
+        vistaMenu.mostrarMensaje("Escriba el índice de la segunda criatura");
+        int criatura2 = scanner.nextInt();
+        Criatura criaturaElegida2 = criaturas.get(criatura1);
+        arena.iniciarBatalla(criaturaElegida1, criaturaElegida2);
+        arena.mostrarEstado();
+    }
+
+    /*
+     * Muestra las criaturas disponibles
+     */
+    public void mostrarCriaturasDisponibles() {
+        vistaMenu.mostrarMensaje("--------------------------------------------");
+        vistaMenu.mostrarMensaje("----------- Criaturas disponibles -----------\n");
+        for (Criatura criatura : criaturas) {
+            vistaMenu.mostrarMensaje(criatura.toString());
+        }
     }
 
     /*
      * Método que se encarga en su totalidad de la creación de criaturas
      * aprovechando el patrón de diseño
      * Factory de las clases EstrategiaBatalla y Criatura y utilizando el
-     * view.mwnuConsola para mostrar información
+     * vistaMenu para mostrar información
+     * al final se agrega la criatura creada a la lista de criaturas disponibles.
      */
     public void crearCriaturaPersonalizada(Scanner scanner) {
         vistaMenu.mostrarMensaje("*********************************");
@@ -40,6 +96,7 @@ public class MenuController {
         int opcion2 = scanner.nextInt();
         Criatura criaturaCreada = CriaturaFactory.crearCriatura(procesarTipo(opcion2), nombre, estrategia);
         vistaMenu.mostrarMensaje("Has creado exitosamente tu criatura" + criaturaCreada.toString());
+        criaturas.add(criaturaCreada);
     }
 
     /*
