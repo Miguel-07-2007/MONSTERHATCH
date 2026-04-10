@@ -10,8 +10,9 @@ import com.miguelmontoya.View.MenuConsola;
 public class Main {
     private static final Logger logger = LogManager.getLogger(ArenaDeBatalla.class);
     public static void main(String[] args) throws Exception {
+        logger.info("Iniciando programa");
         MenuController controladorJuego = new MenuController(new MenuConsola(), ArenaDeBatalla.getInstancia());
         controladorJuego.procesarMenu();
-        
+        logger.info("Fin del programa");
     }
 }

@@ -33,13 +33,14 @@ public class ArenaDeBatalla {
     public String iniciarBatalla(Criatura criatura1, Criatura criatura2) {
         this.criatura1 = criatura1;
         this.criatura2 = criatura2;
+        logger.info("Iniciando batalla entre {} y {}", criatura1.getNombre(), criatura2.getNombre());
         StringBuilder salida = new StringBuilder();
         salida.append("----------------------------------------------------------------------------------\n");
         salida.append("-------------------------------- INICIA LA BATALLA -------------------------------\n");
         int rounds = 1;
         
         while (criatura1.estaViva() && criatura2.estaViva()) {
-            
+            logger.debug("round #" + rounds);
             salida.append("\n------------------------------------ ROUND # " + rounds + " ------------------------------------\n");
             rounds++;
             // Turno criatura 1
@@ -64,8 +65,10 @@ public class ArenaDeBatalla {
 
         if (!criatura1.estaViva() && criatura2.estaViva()) {
             salida.append("El ganador de esta batalla es: ").append(criatura2.getNombre());
+            logger.info("ganador: " + criatura2.getNombre());
         } else if (criatura1.estaViva() && !criatura2.estaViva()) {
             salida.append("El ganador de esta batalla es: ").append(criatura1.getNombre());
+            logger.info("Ganador: " + criatura1.getNombre());
         } else {
             salida.append("Ambos murieron, es un empate\n");
 
@@ -83,6 +86,7 @@ public class ArenaDeBatalla {
         salida.append("--------------------- ESTADO FINAL ----------------------\n");
         salida.append(criatura1.toString()).append("\n");
         salida.append(criatura2.toString()).append("\n");
+        logger.info("Estado finla de las crituras:\n" + criatura1.toString() + "\n" + criatura2.toString());
         return salida.toString();
 
     }

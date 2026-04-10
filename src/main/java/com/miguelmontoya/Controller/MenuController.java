@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.miguelmontoya.Model.Criaturas.Camaleon;
 import com.miguelmontoya.Model.Criaturas.Magica;
 import com.miguelmontoya.Model.Criaturas.Tanque;
@@ -21,10 +24,11 @@ import com.miguelmontoya.Model.Criaturas.Factory.CriaturaFactory;
 
 public class MenuController {
 
-    ArenaDeBatalla arena;
-    MenuConsola vistaMenu;
-    Scanner scanner;
-    List<Criatura> criaturas;
+    private static final Logger logger = LogManager.getLogger(MenuController.class);
+    private ArenaDeBatalla arena;
+    private MenuConsola vistaMenu;
+    private Scanner scanner;
+    private List<Criatura> criaturas;
 
     // Constructor del MenuController, exige instancias de MenuConsola y Scanner.
     public MenuController(MenuConsola vistaMenu, ArenaDeBatalla arena) {
@@ -45,11 +49,6 @@ public class MenuController {
         criaturas.add(mewtwo);
         criaturas.add(snorlax);
     }
-    //   - Crear criaturas personalizadas.
-//   - Listar criaturas disponibles.
-//   - Elegir dos criaturas para batalla.
-//   - Mostrar estrategias disponibles.
-//   - Ejecutar batalla y mostrar resultado.
 
     /*
      * recibe las entradas del usuario para seleccionar dos criaturas de la lista de
@@ -81,6 +80,7 @@ public class MenuController {
         Criatura criaturaCreada = CriaturaFactory.crearCriatura(procesarTipo(datosCriatura.getOpcionTipo()), 
             datosCriatura.getNombre(), estrategia);
         criaturas.add(criaturaCreada);
+        logger.info("Criatura creada con éxito:\n" + criaturaCreada.toString());
         vistaMenu.mostrarMensaje("Criatura creada con éxito: \n" + criaturaCreada.toString());
     }
 

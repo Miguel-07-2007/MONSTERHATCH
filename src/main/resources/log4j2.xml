@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Archivo donde se guardan los logs -->
+        <RollingFile name="RollingFile" fileName="logs/app.log"
+                    filePattern="logs/app-%d{yyyy-MM-dd}.log">
+            
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</Pattern>
+            </PatternLayout>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+
+        </RollingFile>
+
+
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger global -->
+        <Root level="trace">
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+
+</Configuration>
