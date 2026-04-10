@@ -38,10 +38,10 @@ public class ArenaDeBatalla {
         salida.append("----------------------------------------------------------------------------------\n");
         salida.append("-------------------------------- INICIA LA BATALLA -------------------------------\n");
         int rounds = 1;
-        
         while (criatura1.estaViva() && criatura2.estaViva()) {
             logger.debug("round #" + rounds);
-            salida.append("\n------------------------------------ ROUND # " + rounds + " ------------------------------------\n");
+            salida.append("\n------------------------------------ ROUND # " + rounds
+                    + " ------------------------------------\n");
             rounds++;
             // Turno criatura 1
             salida.append(criatura1.ejecutarAccion(criatura2)).append("\n");
@@ -60,7 +60,6 @@ public class ArenaDeBatalla {
 
             // Procesar efectos criatura 2
             salida.append(criatura2.aplicarEfectos()).append("\n");
-            
         }
 
         if (!criatura1.estaViva() && criatura2.estaViva()) {
