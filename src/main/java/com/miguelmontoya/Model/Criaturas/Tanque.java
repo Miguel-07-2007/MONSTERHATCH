@@ -10,7 +10,7 @@ public class Tanque extends Criatura{
     public Tanque(String nombre, EstrategiaBatalla estrategia, String tipo) {
         super(nombre, estrategia, tipo.toLowerCase());
         this.vida = 100;
-        this.danio = 20;
+        this.danio = 30;
         this.defensa = 15;
         this.esquivaActiva = true;
         this.tipo = "tanque";

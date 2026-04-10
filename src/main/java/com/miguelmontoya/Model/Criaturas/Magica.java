@@ -10,7 +10,7 @@ public class Magica extends Criatura{
     public Magica(String nombre, EstrategiaBatalla estrategia, String tipo) {
         super(nombre, estrategia, tipo.toLowerCase());
         this.vida = 80;
-        this.danio = 30;
+        this.danio = 35;
         this.defensa = 10;
         this.esquivaActiva = false;
         this.tipo = "magica";
@@ -23,15 +23,15 @@ public class Magica extends Criatura{
     public String ataca(Criatura enemigo) {
         if (this.turnosLetargados > 0) {
             this.defensa += 5; // Aumenta la defensa en 5 puntos mientras esté letargada
-            return (this.nombre + " aumenta su defensa bajo los efectos de latargia por ser mágica, y ataca a " + enemigo.getNombre()) +
-                    ("\n" + enemigo.reducirVida(this.danio));
+            return ('¡' + this.nombre + " aumenta su defensa bajo los efectos de latargia por ser mágica, y ataca a " + enemigo.getNombre())
+                    + ". "+ enemigo.reducirVida(this.danio);
         }
-        return (this.nombre + " ataca a " + enemigo.getNombre()) + ("\n" + enemigo.reducirVida(this.danio));
+        return (this.nombre + " ataca a " + enemigo.getNombre() + ". " + enemigo.reducirVida(this.danio));
     }
 
     @Override
     public String aplicarVeneno() {
         this.danio += 2; // Aumenta el daño en 2 puntos mientras esté envenenada
-        return (this.nombre + " aumenta su daño bajo los efectos del veneno por ser mágica.");
+        return ('¡' + this.nombre + " aumenta su daño bajo los efectos del veneno por ser mágica!");
     }
 }

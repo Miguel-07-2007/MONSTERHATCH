@@ -10,7 +10,7 @@ public class Camaleon extends Criatura {
         public Camaleon(String nombre, EstrategiaBatalla estrategia, String tipo) {
         super(nombre, estrategia, tipo.toLowerCase());
         this.vida = 70;
-        this.danio = 25;
+        this.danio = 35;
         this.defensa = 10;
         this.esquivaActiva = false;
         this.tipo = "camaleon";

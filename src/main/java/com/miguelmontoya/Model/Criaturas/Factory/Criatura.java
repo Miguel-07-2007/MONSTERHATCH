@@ -117,7 +117,7 @@ public class Criatura {
             return (nombre + " esquiva completamente el daño");
         }
         int danioReal = Math.max(danio - defensa, 0);
-        vida -= danioReal;
+        vida = Math.max(vida - danioReal, 0);
         return (nombre + " recibe " + danioReal + " de daño. Vida restante: " + vida);
     }
 
@@ -127,9 +127,8 @@ public class Criatura {
 
     /**
      * Método para ejecutar la acción de la criatura, que puede ser un ataque normal
-     * o una estrategia
-     * especial dependiendo de la probabilidad, si el enemigo ya tiene veneno, no se
-     * aplicará la estrategia envenenadora.
+     * o una estrategia especial dependiendo de la probabilidad, si el enemigo ya 
+     * tiene veneno, no se aplicará la estrategia envenenadora.
      */
     public String ejecutarAccion(Criatura enemigo) {
         int probabilidadDeUsarEstrategia = (int) (Math.random() * 11);
@@ -143,9 +142,9 @@ public class Criatura {
         if (this.turnosLetargados > 0) {
             int letarga = 5 + (int) (Math.random() * 6); // la letargia total será de entre 5 y 10 puntos de ataque
             return (this.nombre + " bajo los efectos de latargia, ataca a " + enemigo.getNombre()) +
-                    ("\n" + enemigo.reducirVida(this.danio - letarga));
+                    (". " + enemigo.reducirVida(this.danio - letarga));
         }
-        return (this.nombre + " ataca a " + enemigo.getNombre()) + ("\n" + enemigo.reducirVida(this.danio));
+        return (this.nombre + " ataca a " + enemigo.getNombre() + ". " + enemigo.reducirVida(this.danio));
     }
 
     /**
@@ -153,8 +152,8 @@ public class Criatura {
      * llamar según la cantidad de turnos veneno restantes.
      */
     public String aplicarVeneno() {
-        int danio = 5 + (int) (Math.random() * 6); // el daño total del veneno será entre 5 y 10
-        this.vida -= danio;
+        int danio = 10 + (int)(Math.random() * 6); // el daño total del veneno será entre 5 y 10
+        this.vida = Math.max(vida - danio, 0);
         this.turnosVeneno--;
         return (this.nombre + " sufre " + danio + " de daño por el veneno. Vida restante: " + this.vida +
                 ". Turnos de veneno restantes: " + this.turnosVeneno);
@@ -174,6 +173,7 @@ public class Criatura {
     public String toString() {
         return "Criatura{" +
                 "nombre='" + nombre + '\'' +
+                ", estrategia='" + estrategia.getClass().getSimpleName() + '\'' +
                 ", vida=" + vida +
                 ", defensa=" + defensa +
                 ", danio=" + danio +

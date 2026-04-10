@@ -10,8 +10,8 @@ public class EstrategiaEvasiva implements EstrategiaBatalla{
     @Override
     public String actuar(Criatura criatura, Criatura enemigo) {
         criatura.activarEsquiva();
-        return(criatura.getNombre() + " ha activado su estrategia evasiva, y está"
-        + " listo para evadir el próximo ataque de " + enemigo.getNombre());
+        return('¡' + criatura.getNombre() + " ha activado su estrategia evasiva, y está"
+        + " listo para evadir el próximo ataque de " + enemigo.getNombre() + '!');
     }
 
     

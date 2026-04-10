@@ -7,10 +7,11 @@ public class EstrategiaAgresiva implements EstrategiaBatalla{
 
     @Override
     public String actuar(Criatura criatura, Criatura enemigo) {
-        int daño = criatura.getDanio() + (int)(Math.random()*5);
-        enemigo.reducirVida(daño);
-        return(criatura.getNombre() + " ataca de forma agresiva causando " + daño +
-        " puntos de daño a " + enemigo.getNombre());
+        int danio = criatura.getDanio() + (int)(Math.random()*11);
+        // enemigo.reducirVida(danio);
+        // return('¡' + criatura.getNombre() + " ataca de forma agresiva causando " + danio +
+        // " puntos de daño a " + enemigo.getNombre() + '!' + "\nVida restante: " + enemigo.getVida());
+        return('¡' + criatura.getNombre() + " ataca de forma agresiva!\n" + enemigo.reducirVida(danio));
     }
     
 }
