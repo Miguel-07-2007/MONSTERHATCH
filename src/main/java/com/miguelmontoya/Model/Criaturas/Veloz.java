@@ -20,7 +20,7 @@ public class Veloz extends Criatura{
     }
 
     @Override
-    public String ataca(Criatura enemigo) {
+    public String atacar(Criatura enemigo) {
         if (this.turnosLetargados > 0) {
             return (this.nombre + " no sufre bajo los efectos de latargia por ser veloz, y ataca a " + enemigo.getNombre()) +
                     enemigo.reducirVida(this.danio);

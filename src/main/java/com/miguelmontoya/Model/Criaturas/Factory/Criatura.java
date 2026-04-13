@@ -135,10 +135,10 @@ public class Criatura {
         if (probabilidadDeUsarEstrategia > 5 && enemigo.getTurnosVeneno() < 1) {
             return estrategia.actuar(this, enemigo);
         }
-        return this.ataca(enemigo);
+        return this.atacar(enemigo);
     }
 
-    public String ataca(Criatura enemigo) {
+    public String atacar(Criatura enemigo) {
         if (this.turnosLetargados > 0) {
             int letarga = 5 + (int) (Math.random() * 6); // la letargia total será de entre 5 y 10 puntos de ataque
             return (this.nombre + " bajo los efectos de latargia, ataca a " + enemigo.getNombre()) +

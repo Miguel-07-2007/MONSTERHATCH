@@ -1,2 +1,15 @@
-2026-04-10 08:32:31 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Iniciando programa
-2026-04-10 08:32:39 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Fin del programa
+2026-04-13 12:53:37 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Iniciando programa
+2026-04-13 12:55:21 INFO  com.miguelmontoya.Controller.MenuController - Criatura creada con éxito:
+Criatura{nombre='Miguel', estrategia='EstrategiaDefensiva', vida=80, defensa=10, danio=35, tipo='magica'}
+2026-04-13 12:56:28 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Iniciando batalla entre Miguel y Pikachu
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #1
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #2
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #3
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #4
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #5
+2026-04-13 12:56:28 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #6
+2026-04-13 12:56:28 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - ganador: Pikachu
+2026-04-13 12:56:28 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Estado finla de las crituras:
+Criatura{nombre='Miguel', estrategia='EstrategiaDefensiva', vida=0, defensa=24, danio=35, tipo='magica'}
+Criatura{nombre='Pikachu', estrategia='EstrategiaEnvenenadora', vida=40, defensa=15, danio=30, tipo='tanque'}
+2026-04-13 12:58:18 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Fin del programa

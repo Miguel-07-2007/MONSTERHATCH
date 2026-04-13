@@ -20,7 +20,7 @@ public class Magica extends Criatura{
     }
 
         @Override
-    public String ataca(Criatura enemigo) {
+    public String atacar(Criatura enemigo) {
         if (this.turnosLetargados > 0) {
             this.defensa += 5; // Aumenta la defensa en 5 puntos mientras esté letargada
             return ('¡' + this.nombre + " aumenta su defensa bajo los efectos de latargia por ser mágica, y ataca a " + enemigo.getNombre())
