@@ -1,0 +1,15 @@
+2026-04-09 23:12:43 INFO  com.miguelmontoya.Main - Iniciando programa
+2026-04-09 23:14:05 INFO  com.miguelmontoya.Controller.MenuController - Criatura creada con éxito: 
+Criatura{nombre='Froakie', estrategia='EstrategiaDefensiva', vida=70, defensa=10, danio=35, tipo='camaleon'}
+2026-04-09 23:14:26 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Iniciando batalla entre Mewtwo y Froakie
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #1
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #2
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #3
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #4
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #5
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #6
+2026-04-09 23:14:26 DEBUG com.miguelmontoya.Controller.ArenaDeBatalla - round #7
+2026-04-09 23:14:26 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Ganador: Mewtwo
+2026-04-09 23:14:26 INFO  com.miguelmontoya.Controller.ArenaDeBatalla - Estado final de las criaturas: 
+Criatura{nombre='Mewtwo', estrategia='EstrategiaAletargadora', vida=28, defensa=10, danio=35, tipo='magica'}
+Criatura{nombre='Froakie', estrategia='EstrategiaDefensiva', vida=0, defensa=29, danio=35, tipo='camaleon'}

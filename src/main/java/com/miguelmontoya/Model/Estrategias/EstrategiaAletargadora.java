@@ -10,8 +10,8 @@ public class EstrategiaAletargadora implements EstrategiaBatalla{
     @Override
     public String actuar(Criatura criatura, Criatura enemigo){
         enemigo.aumentarTurnosLetargados(2);
-        return(criatura.getNombre() + " ha activado su estrategia aletargadora, así que el daño de "
-        + enemigo.getNombre() + " se verá reducido en los próximos 2 turnos");
+        return('¡' + criatura.getNombre() + " ha activado su estrategia aletargadora, así que el daño de "
+        + enemigo.getNombre() + "\nse verá reducido en los próximos 2 turnos!");
     }
 
 }

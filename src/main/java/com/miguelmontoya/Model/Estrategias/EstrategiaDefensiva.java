@@ -10,8 +10,8 @@ public class EstrategiaDefensiva implements EstrategiaBatalla{
     public String actuar(Criatura criatura, Criatura enemigo) {
         int escudo = 5 + (int)(Math.random()*5);
         criatura.aumentarDefensa(escudo);
-        return(criatura.getNombre() + " ha activado su estrategia curativa y refuerza " +
-        "su defensa aumentando su escudo en " + escudo + " puntos");
+        return('¡' + criatura.getNombre() + " ha activado su estrategia curativa y refuerza " +
+        "su defensa \naumentando su escudo en " + escudo + " puntos!");
     }
 
     

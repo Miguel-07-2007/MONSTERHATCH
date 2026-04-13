@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.miguelmontoya.Model.Criaturas.Camaleon;
 import com.miguelmontoya.Model.Criaturas.Magica;
 import com.miguelmontoya.Model.Criaturas.Tanque;
@@ -11,31 +14,40 @@ import com.miguelmontoya.Model.Criaturas.Veloz;
 import com.miguelmontoya.Model.Criaturas.Factory.Criatura;
 import com.miguelmontoya.Model.Estrategias.EstrategiaAgresiva;
 import com.miguelmontoya.Model.Estrategias.EstrategiaEnvenenadora;
+import com.miguelmontoya.Model.Estrategias.EstrategiaEvasiva;
 import com.miguelmontoya.Model.Estrategias.Factory.EstrategiaBatalla;
+import com.miguelmontoya.Model.Estrategias.EstrategiaCurativa;
+import com.miguelmontoya.Model.Estrategias.EstrategiaAletargadora;
 import com.miguelmontoya.View.MenuConsola;
 import com.miguelmontoya.Model.Estrategias.Factory.EstrategiaFactory;
 import com.miguelmontoya.Model.Criaturas.Factory.CriaturaFactory;
 
 public class MenuController {
 
-    ArenaDeBatalla arena;
-    MenuConsola vistaMenu;
-    Scanner scanner;
-    List<Criatura> criaturas;
+    private static final Logger logger = LogManager.getLogger(MenuController.class);
+    private ArenaDeBatalla arena;
+    private MenuConsola vistaMenu;
+    private Scanner scanner;
+    private List<Criatura> criaturas;
 
     // Constructor del MenuController, exige instancias de MenuConsola y Scanner.
-    public MenuController(MenuConsola vistaMenu) {
+    public MenuController(MenuConsola vistaMenu, ArenaDeBatalla arena) {
+        this.arena = arena;
         this.vistaMenu = vistaMenu;
         this.scanner = new Scanner(System.in);
         this.criaturas = new ArrayList<>();
-        Criatura charizard = new Camaleon("Charizard", new EstrategiaAgresiva(), "camaleon");
-        Criatura pikachu = new Tanque("Pikachu", new EstrategiaEnvenenadora(), "tanque");
-        Criatura bulbasaur = new Magica("Bulbasaur", new EstrategiaEnvenenadora(), "magica");
-        Criatura squirtle = new Veloz("Squirtle", new EstrategiaAgresiva(), "veloz");
+        Criatura charizard = new Camaleon("Charizard", new EstrategiaAgresiva(), "Camaleon");
+        Criatura pikachu = new Tanque("Pikachu", new EstrategiaEnvenenadora(), "Tanque");
+        Criatura bulbasaur = new Magica("Bulbasaur", new EstrategiaCurativa(), "Magico");
+        Criatura squirtle = new Veloz("Squirtle", new EstrategiaEvasiva(), "Veloz");
+        Criatura mewtwo = new Magica("Mewtwo", new EstrategiaAletargadora(), "Magico");
+        Criatura snorlax = new Magica("Snorlax", new EstrategiaCurativa(), "Magico");
         criaturas.add(charizard);
         criaturas.add(pikachu);
         criaturas.add(bulbasaur);
         criaturas.add(squirtle);
+        criaturas.add(mewtwo);
+        criaturas.add(snorlax);
     }
 
     /*
@@ -49,33 +61,10 @@ public class MenuController {
      * de las criaturas después de cada acción.
      */
     public void iniciarBatalla() {
-        vistaMenu.mostrarMensaje("---------------------------------------------");
-        vistaMenu.mostrarMensaje("-------- Preparando Arena de Batalla --------\n");
-        vistaMenu.mostrarMensaje("Para iniciar la batalla es necesario que seleccione dos" +
-                "criaturas, a continuación se le presenta la lista: \n");
-        mostrarCriaturasDisponibles();
-        vistaMenu.mostrarMensaje("Escriba el índice de la primera criatura");
-        int criatura1 = scanner.nextInt();
-        Criatura criaturaElegida1 = criaturas.get(criatura1);
-        vistaMenu.mostrarMensaje("Escriba el índice de la segunda criatura");
-        int criatura2 = scanner.nextInt();
-        Criatura criaturaElegida2 = criaturas.get(criatura2);
-        arena.iniciarBatalla(criaturaElegida1, criaturaElegida2);
-        arena.mostrarEstado();
-        scanner.close();
+        List<Criatura> elegidas = vistaMenu.solicitarCriaturas(this.criaturas, this.scanner);
+        vistaMenu.mostrarMensaje(arena.iniciarBatalla(elegidas.get(0), elegidas.get(1)));;
+        vistaMenu.mostrarMensaje(arena.mostrarEstado());
     }
-
-    /*
-     * Muestra las criaturas disponibles
-     */
-    public void mostrarCriaturasDisponibles() {
-        vistaMenu.mostrarMensaje("------------------------------------------------");
-        vistaMenu.mostrarMensaje("------------- Criaturas disponibles -------------\n");
-        for (int i = 0; i < criaturas.size(); i++) {
-            vistaMenu.mostrarMensaje(i+1 + ". " + criaturas.get(i).toString());
-        }
-        System.out.println("------------------------------------------------");
-        }
 
     /*
      * Método que se encarga en su totalidad de la creación de criaturas
@@ -85,21 +74,14 @@ public class MenuController {
      * al final se agrega la criatura creada a la lista de criaturas disponibles.
      */
     public void crearCriaturaPersonalizada(Scanner scanner) {
-        vistaMenu.mostrarMensaje("*********************************");
-        vistaMenu.mostrarMensaje("A continuación podrás personalizar tu criatura");
-        vistaMenu.mostrarMensaje("Ingrese el nombre:");
-        String nombre = scanner.nextLine();
-        vistaMenu.mostrarEstrategias();
-        vistaMenu.mostrarMensaje("Ingrese el número de la estrategia que desea:");
-        int opcion = scanner.nextInt();
-        EstrategiaBatalla estrategia = EstrategiaFactory.crearEstrategia(procesarEstrategia(opcion));
-        vistaMenu.mostrarTipos();
-        vistaMenu.mostrarMensaje("Ingrese el número del tipo de criatura que desea:");
-        int opcion2 = scanner.nextInt();
-        Criatura criaturaCreada = CriaturaFactory.crearCriatura(procesarTipo(opcion2), nombre, estrategia);
-        vistaMenu.mostrarMensaje("Has creado exitosamente tu criatura" + criaturaCreada.toString());
+        EntradaDatosCriatura  datosCriatura = vistaMenu.pedirDatosCriatura(scanner);
+        EstrategiaBatalla estrategia = EstrategiaFactory.crearEstrategia(procesarEstrategia(
+            datosCriatura.getOpcionEstrategia()));
+        Criatura criaturaCreada = CriaturaFactory.crearCriatura(procesarTipo(datosCriatura.getOpcionTipo()), 
+            datosCriatura.getNombre(), estrategia);
         criaturas.add(criaturaCreada);
-        scanner.close();
+        logger.info("Criatura creada con éxito:\n" + criaturaCreada.toString());
+        vistaMenu.mostrarMensaje("Criatura creada con éxito: \n" + criaturaCreada.toString());
     }
 
     /*
@@ -148,27 +130,30 @@ public class MenuController {
      * menú, y de llamar a los métodos y clases correspondientes para ejecutar la
      * acción elegida por el usuario.
      */
-    public static void procesarOpcionMenu(int opcion) {
-        while (opcion != 5) {
+    public void procesarMenu() {
+        int opcion = 0;
+        do {
+            opcion = vistaMenu.mostrarMenu(scanner);
             switch (opcion) {
                 case 1:
-                    // Lógica para crear criatura personalizada
+                    crearCriaturaPersonalizada(this.scanner);
                     break;
                 case 2:
-                    // Lógica para listar criaturas disponibles
+                    vistaMenu.mostrarCriaturasDisponibles(criaturas);
                     break;
                 case 3:
-                    // Lógica para elegir dos criaturas para batalla
+                    iniciarBatalla();
                     break;
                 case 4:
-                    // Lógica para mostrar estrategias disponibles
+                    vistaMenu.mostrarEstrategias();
                     break;
                 case 5:
-                    System.out.println("Gracias por jugar Monster Hatch. ¡Hasta la próxima!");
+                    vistaMenu.mostrarMensaje("Gracias por jugar Monster Hatch. ¡Hasta la próxima!");
                     break;
                 default:
-                    System.out.println("Opción no válida. Por favor, elige una opción del menú.");
+                    vistaMenu.mostrarMensaje("Opción no válida. Por favor, elige una opción del menú.");
             }
-        }
-    }
+        } while (opcion != 5);
+        scanner.close();
+    } 
 }

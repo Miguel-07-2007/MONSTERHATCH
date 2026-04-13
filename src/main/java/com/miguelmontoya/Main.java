@@ -1,20 +1,18 @@
 package com.miguelmontoya;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import com.miguelmontoya.Controller.ArenaDeBatalla;
 import com.miguelmontoya.Controller.MenuController;
-import com.miguelmontoya.Model.Criaturas.Factory.Criatura;
-import com.miguelmontoya.Model.Estrategias.Factory.EstrategiaBatalla;
 import com.miguelmontoya.View.MenuConsola;
 
-
 public class Main {
+    private static final Logger logger = LogManager.getLogger(ArenaDeBatalla.class);
     public static void main(String[] args) throws Exception {
-
-
-        MenuController controladorJuego = new MenuController(new MenuConsola());
-        controladorJuego.mostrarCriaturasDisponibles();
-        
+        logger.info("Iniciando programa");
+        MenuController controladorJuego = new MenuController(new MenuConsola(), ArenaDeBatalla.getInstancia());
+        controladorJuego.procesarMenu();
+        logger.info("Fin del programa");
     }
 }

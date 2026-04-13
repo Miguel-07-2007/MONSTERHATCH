@@ -11,8 +11,8 @@ public class EstrategiaCurativa implements EstrategiaBatalla{
     public String actuar(Criatura criatura, Criatura enemigo) {
         int aumento = 10 + (int)Math.random() * 11;
         criatura.aumentarVida(aumento);
-        return(criatura.getNombre() + " ha activado su estrategia curativa y aumenta " + 
-        aumento + " puntos de vida en este turno");
+        return('¡' + criatura.getNombre() + " ha activado su estrategia curativa y aumenta " + 
+        aumento + " puntos de vida en este turno!");
     }
 
 }

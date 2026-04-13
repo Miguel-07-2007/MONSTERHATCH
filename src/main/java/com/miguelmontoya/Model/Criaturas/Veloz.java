@@ -10,8 +10,8 @@ public class Veloz extends Criatura{
     public Veloz(String nombre, EstrategiaBatalla estrategia, String tipo){
         super(nombre, estrategia, tipo.toLowerCase());
         this.vida = 70;
-        this.danio = 20;
-        this.defensa = 15;
+        this.danio = 35;
+        this.defensa = 10;
         this.esquivaActiva = true;
         this.tipo = "veloz";
         this.turnosLetargados = 0;
@@ -20,11 +20,11 @@ public class Veloz extends Criatura{
     }
 
     @Override
-    public String ataca(Criatura enemigo) {
+    public String atacar(Criatura enemigo) {
         if (this.turnosLetargados > 0) {
             return (this.nombre + " no sufre bajo los efectos de latargia por ser veloz, y ataca a " + enemigo.getNombre()) +
-                    ("\n" + enemigo.reducirVida(this.danio));
+                    enemigo.reducirVida(this.danio);
         }
-        return (this.nombre + " ataca a " + enemigo.getNombre()) + ("\n" + enemigo.reducirVida(this.danio));
+        return (this.nombre + " ataca a " + enemigo.getNombre() + ". " + enemigo.reducirVida(this.danio));
     }
 }
